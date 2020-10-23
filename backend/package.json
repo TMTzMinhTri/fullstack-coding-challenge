@@ -1,12 +1,16 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "type": "module",
-  "dependencies": {
-    "express": "^4.17.1",
-    "mongoose": "^5.10.9",
-    "nodemon": "^2.0.6"
-  }
+	"name": "backend",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"type": "module",
+	"scripts": {
+		"start": "nodemon --inspect server.js"
+	},
+	"dependencies": {
+		"express": "^4.17.1",
+		"mongoose": "^5.10.9",
+		"morgan": "^1.10.0",
+		"nodemon": "^2.0.6"
+	}
 }
