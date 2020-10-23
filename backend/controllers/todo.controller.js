@@ -40,7 +40,7 @@ router.post('/', async function (req, res) {
 router.patch('/:id', async function (req, res) {
 	const { id } = req.params;
 	const { isComplete } = req.body;
-	if (!isComplete) {
+	if (isComplete === undefined) {
 		return res.error('param_error', "isComplete can't be blank");
 	}
 	try {

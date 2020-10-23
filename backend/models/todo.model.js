@@ -1,5 +1,4 @@
 import Mongoose from 'mongoose';
-
 const todoSchema = new Mongoose.Schema(
 	{
 		content: String,
@@ -18,7 +17,11 @@ const todoSchema = new Mongoose.Schema(
 
 class Todo {
 	static getListTodoByDate(begin, end) {
-		return this.where('created_at').gt(begin).lt(end);
+		const startDate = new Date(begin);
+		const endDate = new Date(end);
+		const beginingOfDay = new Date(startDate.setHours(0, 0, 0, 0));
+		const endOfDay = new Date(endDate.setHours(23, 59, 59, 999));
+		return this.where('created_at').gte(beginingOfDay).lte(endOfDay);
 	}
 }
 
