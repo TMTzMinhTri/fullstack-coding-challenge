@@ -14,7 +14,9 @@ router.get('/', requireQueryParams(['begin', 'end']), async function (req, res) 
 		const todos = await Todo.getListTodoByDate(begin, end);
 		return res.success(todos);
 	} catch (error) {
-		return res.status(500).send(error.message);
+		console.log(error);
+		if (error.message === 'invalid_date') return res.error('param_error', error.message);
+		else return res.status(500).send(error.message);
 	}
 });
 
