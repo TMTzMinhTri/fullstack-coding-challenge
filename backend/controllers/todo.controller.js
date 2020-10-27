@@ -8,7 +8,7 @@ var router = express.Router();
 router.use(success);
 router.use(error);
 
-router.get('/', [requireQueryParams('begin'), requireQueryParams('end')], async function (req, res) {
+router.get('/', requireQueryParams(['begin', 'end']), async function (req, res) {
 	const { begin, end } = req.query;
 	try {
 		const todos = await Todo.getListTodoByDate(begin, end);
@@ -18,7 +18,7 @@ router.get('/', [requireQueryParams('begin'), requireQueryParams('end')], async 
 	}
 });
 
-router.post('/', requireBodyParam('content'), async function (req, res) {
+router.post('/', requireBodyParam(['content']), async function (req, res) {
 	const { content } = req.body;
 	try {
 		const newTodo = new Todo({ content });
@@ -29,7 +29,7 @@ router.post('/', requireBodyParam('content'), async function (req, res) {
 	}
 });
 
-router.patch('/:id', requireBodyParam('isComplete'), async function (req, res) {
+router.patch('/:id', requireBodyParam(['isComplete']), async function (req, res) {
 	const { id } = req.params;
 	const { isComplete } = req.body;
 	try {
