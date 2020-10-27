@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { RangeDatePicker } from 'react-google-flight-datepicker';
 import { Container, Row, Col } from 'reactstrap';
+import { isNull } from 'lodash';
 
 import 'react-google-flight-datepicker/dist/main.css';
 
-import { ListTodo } from './Components/ListTodos.js';
-import { FormCreate } from './Components/formCreate.js';
-import { getTodos } from './Store/actions/todo.action.js';
+import { ListTodo } from './components/ListTodos.js';
+import { FormCreate } from './components/FormCreate.js';
+import { getTodos } from './store/actions/todo.action.js';
 
 function App({ todos, getTodos }) {
 	const [date, setDate] = React.useState({
@@ -18,7 +18,9 @@ function App({ todos, getTodos }) {
 
 	React.useEffect(() => {
 		const { startDate, endDate } = date;
-		getTodos({ begin: startDate.toISOString(), end: endDate.toISOString() });
+		if (!isNull(endDate) && !isNull(startDate)) {
+			getTodos({ begin: startDate.toISOString(), end: endDate.toISOString() });
+		}
 	}, [getTodos, date]);
 
 	return (
@@ -40,12 +42,8 @@ function App({ todos, getTodos }) {
 const mapState = (state) => ({
 	todos: state.todo.todos,
 });
-const mapAction = (dispath) =>
-	bindActionCreators(
-		{
-			getTodos,
-		},
-		dispath
-	);
+const mapAction = {
+	getTodos,
+};
 
 export default connect(mapState, mapAction)(App);

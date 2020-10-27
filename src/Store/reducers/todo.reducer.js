@@ -11,7 +11,7 @@ export default function (state = initState, action) {
 		case 'DELETE_TODO':
 			return {
 				...state,
-				todos: [...state.todos].filter((it) => it._id !== action.payload._id),
+				todos: state.todos.filter((it) => it._id !== action.payload._id),
 			};
 		case 'UPDATE_TODO':
 			const index = state.todos.findIndex((it) => it._id === action.payload._id);

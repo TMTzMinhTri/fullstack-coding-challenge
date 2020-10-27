@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createNewTodo } from '../Store/actions/todo.action';
-import { bindActionCreators } from 'redux';
+import { createNewTodo } from '../store/actions/todo.action';
 import { Button, Input, Form, FormGroup } from 'reactstrap';
 import styled from 'styled-components';
 
@@ -36,11 +35,7 @@ const FormCreateComponent = ({ createNewTodo }) => {
 		</Form>
 	);
 };
-const mapAction = (dispath) =>
-	bindActionCreators(
-		{
-			createNewTodo,
-		},
-		dispath
-	);
+const mapAction = {
+	createNewTodo,
+};
 export const FormCreate = connect(null, mapAction)(FormCreateComponent);
